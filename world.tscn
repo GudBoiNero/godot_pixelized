@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk0uwt5dx3fhd"]
+
+[ext_resource type="Script" path="res://camera.gd" id="1_1mdux"]
+[ext_resource type="Shader" path="res://pixelart_stylizer.gdshader" id="1_wgcdp"]
+[ext_resource type="PackedScene" uid="uid://ddv4u8epoum8j" path="res://level.tscn" id="2_0wt8x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7nbm"]
+render_priority = 0
+shader = ExtResource("1_wgcdp")
+shader_parameter/depth_threshold = 0.05
+shader_parameter/reverse_depth_threshold = 0.25
+shader_parameter/normal_threshold = 0.6
+shader_parameter/darken_amount = 0.3
+shader_parameter/lighten_amount = 1.5
+shader_parameter/normal_edge_bias = Vector3(1, 1, 1)
+shader_parameter/light_direction = Vector3(-0.96, -0.18, 0.2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7o5fi"]
+render_priority = 0
+shader = ExtResource("1_wgcdp")
+shader_parameter/depth_threshold = 0.05
+shader_parameter/reverse_depth_threshold = 0.25
+shader_parameter/normal_threshold = 0.6
+shader_parameter/darken_amount = 0.3
+shader_parameter/lighten_amount = 1.5
+shader_parameter/normal_edge_bias = Vector3(1, 1, 1)
+shader_parameter/light_direction = Vector3(-0.96, -0.18, 0.2)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ufe00"]
+material = SubResource("ShaderMaterial_7o5fi")
+flip_faces = true
+size = Vector2(2, 2)
+center_offset = Vector3(0, 0, -2)
+
+[node name="World" type="Node3D"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+size = Vector2i(576, 324)
+render_target_update_mode = 4
+
+[node name="Camera" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 9.37234, 1.821)
+projection = 1
+current = true
+size = 20.0
+near = 0.001
+far = 400.0
+script = ExtResource("1_1mdux")
+
+[node name="PostProcessing" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera"]
+material_override = SubResource("ShaderMaterial_d7nbm")
+cast_shadow = 0
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_ufe00")
+
+[node name="Level" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_0wt8x")]
