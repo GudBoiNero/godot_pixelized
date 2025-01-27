@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk0uwt5dx3fhd"]
+
+[ext_resource type="Script" path="res://scripts/camera.gd" id="1_07d1v"]
+[ext_resource type="Shader" path="res://shaders/pixelart_stylizer.gdshader" id="2_8ok65"]
+[ext_resource type="PackedScene" uid="uid://bvdl8fpvta2ek" path="res://scenes/level.tscn" id="3_qdsef"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qhqmc"]
+render_priority = 0
+shader = ExtResource("2_8ok65")
+shader_parameter/depth_threshold = 0.05
+shader_parameter/reverse_depth_threshold = 0.25
+shader_parameter/normal_threshold = 0.6
+shader_parameter/darken_amount = 0.3
+shader_parameter/lighten_amount = 1.5
+shader_parameter/normal_edge_bias = Vector3(1, 1, 1)
+shader_parameter/light_direction = Vector3(0, 0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ufe00"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="SphereMesh" id="SphereMesh_6hrgv"]
+
+[node name="World" type="Node3D"]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+sdf_oversize = 0
+sdf_scale = 0
+size = Vector2i(576, 324)
+render_target_update_mode = 4
+
+[node name="CameraAnchor" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("camera")]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+script = ExtResource("1_07d1v")
+camera = NodePath("Camera")
+
+[node name="Camera" type="Camera3D" parent="SubViewportContainer/SubViewport/CameraAnchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 60)
+projection = 1
+current = true
+fov = 37.8493
+size = 20.0
+near = 0.001
+far = 100.0
+
+[node name="PostProcessing" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/CameraAnchor/Camera"]
+material_override = SubResource("ShaderMaterial_qhqmc")
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_ufe00")
+
+[node name="Anchor" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/CameraAnchor"]
+mesh = SubResource("SphereMesh_6hrgv")
+
+[node name="Level" parent="SubViewportContainer/SubViewport" instance=ExtResource("3_qdsef")]
