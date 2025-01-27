@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="3DPixelArtTest"
+config/name="godot_pixelized"
+config/description="No Description"
 run/main_scene="res://world.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
