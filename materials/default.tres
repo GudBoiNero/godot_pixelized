@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bvr572d2qj7gi"]
+
+[ext_resource type="Shader" path="res://shaders/outline_and_edge.gdshader" id="1_l1et5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4coss"]
+render_priority = 0
+shader = ExtResource("1_l1et5")
+shader_parameter/outline_color = Color(0.507972, 0.507972, 0.507972, 1)
+shader_parameter/edge_color = Color(1, 1, 1, 1)
+shader_parameter/depth_threshold = 0.8
+shader_parameter/depth_normal_threshold = 0.5
+shader_parameter/depth_normal_threshold_scale = 2.0
+shader_parameter/convex_threshold = 0.25
+shader_parameter/convex_normal_threshold = 0.5
+shader_parameter/convex_normal_threshold_scale = 2.0
+
+[resource]
+next_pass = SubResource("ShaderMaterial_4coss")

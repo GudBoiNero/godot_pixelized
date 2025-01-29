@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://dv241bs6htpr1"]
+
+[ext_resource type="Script" path="res://scenes/grass.gd" id="1_jb2aa"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8xosu"]
+sky_top_color = Color(0, 0.816667, 1, 1)
+sky_horizon_color = Color(0.5544, 0.6111, 0.63, 1)
+ground_horizon_color = Color(0.6497, 0.68985, 0.73, 1)
+
+[sub_resource type="Sky" id="Sky_kvvd7"]
+sky_material = SubResource("ProceduralSkyMaterial_8xosu")
+
+[sub_resource type="Environment" id="Environment_vm527"]
+background_mode = 2
+sky = SubResource("Sky_kvvd7")
+ambient_light_source = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kg7a"]
+albedo_color = Color(0.1702, 0.37, 0.1702, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kl60a"]
+size = Vector3(100, 0.1, 100)
+
+[sub_resource type="QuadMesh" id="QuadMesh_kdg6y"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_fyxqc"]
+mesh = SubResource("QuadMesh_kdg6y")
+
+[node name="Plains" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vm527")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_2kg7a")
+mesh = SubResource("BoxMesh_kl60a")
+
+[node name="Grass" type="MultiMeshInstance3D" parent="." node_paths=PackedStringArray("target_mesh")]
+multimesh = SubResource("MultiMesh_fyxqc")
+script = ExtResource("1_jb2aa")
+target_mesh = NodePath("../Ground")

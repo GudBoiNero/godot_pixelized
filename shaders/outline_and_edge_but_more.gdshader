@@ -12,7 +12,6 @@ uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nea
 uniform sampler2D normal_roughness_texture : hint_normal_roughness_texture, repeat_disable, filter_nearest;
 
 group_uniforms color;
-uniform vec4 albedo : source_color = vec4(0.75, 0.75, 0.75, 1.0);
 uniform vec3 outline_color : source_color = vec3(0, 0, 1);
 uniform vec3 edge_color : source_color = vec3(1, 0, 0);
 
@@ -38,8 +37,6 @@ float remap(float value, float low1, float high1, float low2, float high2) {
 }
 
 void fragment() {
-	ALBEDO = albedo.rgb;
-	
 	vec2 texel_size = 1.0 / VIEWPORT_SIZE;
 	
 	vec3 pos[9];
