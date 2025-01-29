@@ -1,7 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://bvdl8fpvta2ek"]
+[gd_scene load_steps=28 format=3 uid="uid://bvdl8fpvta2ek"]
 
 [ext_resource type="Shader" path="res://shaders/clouds.gdshader" id="1_er7l3"]
 [ext_resource type="Script" path="res://scripts/rotator.gd" id="2_wxojq"]
+[ext_resource type="Shader" path="res://shaders/outline_and_edge.gdshader" id="3_it7i0"]
+[ext_resource type="Shader" path="res://shaders/outline_and_edge_but_more.gdshader" id="3_ot2kt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_om055"]
 sky_top_color = Color(0.16954, 0.401078, 0.625033, 1)
@@ -100,23 +102,54 @@ shader_parameter/bump = SubResource("NoiseTexture2D_8rmyi")
 material = SubResource("ShaderMaterial_awsmu")
 size = Vector2(10, 10)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1ue7"]
-diffuse_mode = 3
-metallic = 0.52
-metallic_specular = 0.87
-roughness = 0.18
-emission_enabled = true
-emission_energy_multiplier = 4.69
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0qb8u"]
+render_priority = 0
+shader = ExtResource("3_ot2kt")
+shader_parameter/albedo = Color(0.75, 0.75, 0.75, 1)
+shader_parameter/outline_color = Color(0, 0, 1, 1)
+shader_parameter/edge_color = Color(1, 0, 0, 1)
+shader_parameter/depth_threshold = 0.25
+shader_parameter/depth_normal_threshold = 0.5
+shader_parameter/depth_normal_threshold_scale = 2.0
+shader_parameter/convex_threshold = 0.1
+shader_parameter/concave_threshold = 0.01
+shader_parameter/concave_depth_threshold = 0.5
 
 [sub_resource type="PrismMesh" id="PrismMesh_qk2lu"]
-material = SubResource("StandardMaterial3D_c1ue7")
+material = SubResource("ShaderMaterial_0qb8u")
 size = Vector3(2, 2, 1.5)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_napt0"]
+render_priority = 0
+shader = ExtResource("3_ot2kt")
+shader_parameter/albedo = Color(0.75, 0.75, 0.75, 1)
+shader_parameter/outline_color = Color(0, 0, 1, 1)
+shader_parameter/edge_color = Color(1, 0, 0, 1)
+shader_parameter/depth_threshold = 1.0
+shader_parameter/depth_normal_threshold = 0.5
+shader_parameter/depth_normal_threshold_scale = 2.0
+shader_parameter/convex_threshold = 0.1
+shader_parameter/concave_threshold = 0.01
+shader_parameter/concave_depth_threshold = 0.5
+
 [sub_resource type="BoxMesh" id="BoxMesh_x8014"]
-material = SubResource("StandardMaterial3D_c1ue7")
+material = SubResource("ShaderMaterial_napt0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_po558"]
+render_priority = 0
+shader = ExtResource("3_it7i0")
+shader_parameter/albedo = Color(0.75, 0.75, 0.75, 1)
+shader_parameter/outline_color = Color(0, 0, 1, 1)
+shader_parameter/edge_color = Color(1, 0, 0, 1)
+shader_parameter/depth_threshold = 0.5
+shader_parameter/depth_normal_threshold = 0.5
+shader_parameter/depth_normal_threshold_scale = 2.0
+shader_parameter/convex_threshold = 0.5
+shader_parameter/convex_normal_threshold = 0.5
+shader_parameter/convex_normal_threshold_scale = 2.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_b15yr"]
-material = SubResource("StandardMaterial3D_c1ue7")
+material = SubResource("ShaderMaterial_po558")
 radius = 2.0
 height = 4.0
 
