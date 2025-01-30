@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dk0uwt5dx3fhd"]
+[gd_scene load_steps=8 format=3 uid="uid://dk0uwt5dx3fhd"]
 
 [ext_resource type="Script" path="res://scripts/renderer.gd" id="1_laytw"]
 [ext_resource type="PackedScene" uid="uid://bvdl8fpvta2ek" path="res://scenes/abstract.tscn" id="1_m6khb"]
+[ext_resource type="PackedScene" uid="uid://dv241bs6htpr1" path="res://scenes/plains.tscn" id="2_7t3g6"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="2_aum0o"]
 [ext_resource type="Script" path="res://scripts/display.gd" id="3_2shcm"]
 [ext_resource type="Script" path="res://scripts/camera_3d_texel_snapped.gd" id="3_hy8rl"]
@@ -13,6 +14,8 @@ viewport_path = NodePath("SubViewport")
 script = ExtResource("1_laytw")
 
 [node name="World" type="Node3D" parent="."]
+
+[node name="Plains" parent="World" instance=ExtResource("2_7t3g6")]
 
 [node name="Level" parent="World" instance=ExtResource("1_m6khb")]
 

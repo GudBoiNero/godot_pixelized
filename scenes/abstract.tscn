@@ -110,6 +110,7 @@ omni_attenuation = -0.143
 mesh = SubResource("SphereMesh_av3t0")
 
 [node name="Ground" type="MeshInstance3D" parent="."]
+visible = false
 cast_shadow = 2
 mesh = SubResource("BoxMesh_ldwys")
 surface_material_override/0 = SubResource("StandardMaterial3D_gumcl")

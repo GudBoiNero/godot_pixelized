@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dv241bs6htpr1"]
+[gd_scene load_steps=10 format=3 uid="uid://dv241bs6htpr1"]
 
-[ext_resource type="Script" path="res://scenes/grass.gd" id="1_jb2aa"]
+[ext_resource type="Texture2D" uid="uid://bb4c3e6yclafl" path="res://textures/grass-1.png" id="1_fpr4d"]
+[ext_resource type="Script" path="res://scenes/multi_multi_mesh_generator.gd" id="3_1xsea"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8xosu"]
 sky_top_color = Color(0, 0.816667, 1, 1)
@@ -18,13 +19,21 @@ ambient_light_source = 3
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kg7a"]
 albedo_color = Color(0.1702, 0.37, 0.1702, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_kl60a"]
-size = Vector3(100, 0.1, 100)
+[sub_resource type="PlaneMesh" id="PlaneMesh_ywf3o"]
+size = Vector2(100, 100)
 
-[sub_resource type="QuadMesh" id="QuadMesh_kdg6y"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7l8df"]
+transparency = 1
+albedo_color = Color(0.297561, 0.619009, 0.297894, 1)
+albedo_texture = ExtResource("1_fpr4d")
+heightmap_enabled = true
+texture_filter = 0
+shadow_to_opacity = true
+billboard_mode = 1
 
-[sub_resource type="MultiMesh" id="MultiMesh_fyxqc"]
-mesh = SubResource("QuadMesh_kdg6y")
+[sub_resource type="QuadMesh" id="QuadMesh_dib1a"]
+material = SubResource("StandardMaterial3D_7l8df")
+size = Vector2(2, 2)
 
 [node name="Plains" type="Node3D"]
 
@@ -33,9 +42,10 @@ environment = SubResource("Environment_vm527")
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_2kg7a")
-mesh = SubResource("BoxMesh_kl60a")
+mesh = SubResource("PlaneMesh_ywf3o")
 
-[node name="Grass" type="MultiMeshInstance3D" parent="." node_paths=PackedStringArray("target_mesh")]
-multimesh = SubResource("MultiMesh_fyxqc")
-script = ExtResource("1_jb2aa")
+[node name="GrassGenerator" type="Node3D" parent="." node_paths=PackedStringArray("target_mesh")]
+script = ExtResource("3_1xsea")
 target_mesh = NodePath("../Ground")
+density = 1.8
+mesh_variants = Array[Mesh]([SubResource("QuadMesh_dib1a")])
