@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dv241bs6htpr1"]
+[gd_scene load_steps=11 format=3 uid="uid://dv241bs6htpr1"]
 
 [ext_resource type="Texture2D" uid="uid://bb4c3e6yclafl" path="res://textures/grass-1.png" id="1_fpr4d"]
-[ext_resource type="Script" path="res://scenes/multi_multi_mesh_generator.gd" id="3_1xsea"]
+[ext_resource type="Script" path="res://scripts/multi_multi_mesh_generator.gd" id="3_1xsea"]
+[ext_resource type="Shader" path="res://shaders/grass.gdshader" id="4_dwuy1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8xosu"]
 sky_top_color = Color(0, 0.816667, 1, 1)
@@ -16,23 +17,24 @@ background_mode = 2
 sky = SubResource("Sky_kvvd7")
 ambient_light_source = 3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kg7a"]
-albedo_color = Color(0.1702, 0.37, 0.1702, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yde2q"]
+render_priority = 0
+shader = ExtResource("4_dwuy1")
+shader_parameter/billboard_enabled = false
+shader_parameter/color = Color(0.168627, 0.368627, 0.168627, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ywf3o"]
 size = Vector2(100, 100)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7l8df"]
-transparency = 1
-albedo_color = Color(0.297561, 0.619009, 0.297894, 1)
-albedo_texture = ExtResource("1_fpr4d")
-heightmap_enabled = true
-texture_filter = 0
-shadow_to_opacity = true
-billboard_mode = 1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ue17"]
+render_priority = 0
+shader = ExtResource("4_dwuy1")
+shader_parameter/billboard_enabled = true
+shader_parameter/color = Color(0.168627, 0.368627, 0.168627, 1)
+shader_parameter/tex = ExtResource("1_fpr4d")
 
 [sub_resource type="QuadMesh" id="QuadMesh_dib1a"]
-material = SubResource("StandardMaterial3D_7l8df")
+material = SubResource("ShaderMaterial_8ue17")
 size = Vector2(2, 2)
 
 [node name="Plains" type="Node3D"]
@@ -40,12 +42,13 @@ size = Vector2(2, 2)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vm527")
 
-[node name="Ground" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_2kg7a")
+[node name="Grass" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_yde2q")
 mesh = SubResource("PlaneMesh_ywf3o")
 
 [node name="GrassGenerator" type="Node3D" parent="." node_paths=PackedStringArray("target_mesh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.313, 0)
 script = ExtResource("3_1xsea")
-target_mesh = NodePath("../Ground")
-density = 1.8
+target_mesh = NodePath("../Grass")
+density = 2.0
 mesh_variants = Array[Mesh]([SubResource("QuadMesh_dib1a")])
