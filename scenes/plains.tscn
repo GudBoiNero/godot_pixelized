@@ -17,11 +17,9 @@ background_mode = 2
 sky = SubResource("Sky_kvvd7")
 ambient_light_source = 3
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yde2q"]
-render_priority = 0
-shader = ExtResource("4_dwuy1")
-shader_parameter/billboard_enabled = false
-shader_parameter/color = Color(0.168627, 0.368627, 0.168627, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kg7a"]
+shading_mode = 0
+albedo_color = Color(0.1702, 0.37, 0.1702, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ywf3o"]
 size = Vector2(100, 100)
@@ -29,7 +27,6 @@ size = Vector2(100, 100)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8ue17"]
 render_priority = 0
 shader = ExtResource("4_dwuy1")
-shader_parameter/billboard_enabled = true
 shader_parameter/color = Color(0.168627, 0.368627, 0.168627, 1)
 shader_parameter/tex = ExtResource("1_fpr4d")
 
@@ -43,11 +40,11 @@ size = Vector2(2, 2)
 environment = SubResource("Environment_vm527")
 
 [node name="Grass" type="MeshInstance3D" parent="."]
-material_override = SubResource("ShaderMaterial_yde2q")
+material_override = SubResource("StandardMaterial3D_2kg7a")
 mesh = SubResource("PlaneMesh_ywf3o")
 
 [node name="GrassGenerator" type="Node3D" parent="." node_paths=PackedStringArray("target_mesh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.313, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0786705, 0.312943, 0.0770378)
 script = ExtResource("3_1xsea")
 target_mesh = NodePath("../Grass")
 density = 2.0
