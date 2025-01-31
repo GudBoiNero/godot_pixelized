@@ -12,4 +12,5 @@ void fragment() {
 	vec4 tex_color = texture(tex, UV);
 	ALBEDO = color;
 	ALPHA = tex_color.a;
+    LIGHT_VERTEX = vec3(VERTEX.xy, 0.0);
 }
