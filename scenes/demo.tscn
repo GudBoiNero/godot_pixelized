@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmavddsh1331c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vw8vn"]
+albedo_color = Color(0.25098, 0.356863, 0.160784, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1elyv"]
+material = SubResource("StandardMaterial3D_vw8vn")
+size = Vector2(40, 40)
+
+[node name="Demo" type="Node3D"]
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_1elyv")
+
+[node name="Wall" type="Node3D" parent="."]

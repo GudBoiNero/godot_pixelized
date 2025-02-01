@@ -6,7 +6,7 @@ extends Control
 @export var pixel_movement := true
 @export var sub_pixel_movement_at_integer_scale := false
 
-@onready var _sprite: Sprite2D = $Sprite2D
+@export var _sprite: Sprite2D
 
 
 func _process(_delta: float) -> void:
@@ -22,7 +22,7 @@ func _process(_delta: float) -> void:
 	position = ((screen_size - size) / 2).round()
 	# smooth!
 	if pixel_movement:
-		var cam := viewport.get_camera_3d() as Camera3DTexelSnapped3
+		var cam := viewport.get_camera_3d() as Camera3DTexelSnapped
 		var pixel_error: Vector2 = cam.texel_error * _sprite.scale
 		_sprite.position = -_sprite.scale + pixel_error
 		var is_integer_scale := display_scale == display_scale.floor()

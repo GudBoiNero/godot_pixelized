@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dk0uwt5dx3fhd"]
 
 [ext_resource type="Script" path="res://scripts/renderer.gd" id="1_laytw"]
-[ext_resource type="Script" path="res://scripts/camera_3d_texel_snapped_anchor.gd" id="2_aum0o"]
+[ext_resource type="Script" path="res://scripts/camera.gd" id="2_aum0o"]
 [ext_resource type="PackedScene" uid="uid://bvdl8fpvta2ek" path="res://scenes/abstract.tscn" id="2_ggyho"]
 [ext_resource type="Script" path="res://scripts/display.gd" id="3_2shcm"]
 [ext_resource type="Script" path="res://scripts/camera_3d_texel_snapped.gd" id="3_hy8rl"]
@@ -38,7 +38,7 @@ near = 0.001
 far = 90.0
 script = ExtResource("3_hy8rl")
 
-[node name="Display" type="Control" parent="." node_paths=PackedStringArray("viewport", "_sprite")]
+[node name="Display" type="Control" parent="." node_paths=PackedStringArray("viewport")]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
@@ -48,7 +48,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_2shcm")
 viewport = NodePath("../SubViewport")
-_sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="Display"]
 texture = SubResource("ViewportTexture_bwc6a")

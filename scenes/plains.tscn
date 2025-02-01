@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bb4c3e6yclafl" path="res://textures/grass-1.png" id="1_fpr4d"]
 [ext_resource type="Script" path="res://scripts/multi_multi_mesh_generator.gd" id="3_1xsea"]
-[ext_resource type="Shader" path="res://shaders/grass.gdshader" id="4_dwuy1"]
+[ext_resource type="Shader" path="res://shaders/grass_quad.gdshader" id="4_dwuy1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8xosu"]
 sky_top_color = Color(0, 0.816667, 1, 1)

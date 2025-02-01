@@ -1,6 +1,6 @@
 # Credit to David Holland : https://www.davidhol.land/articles/3d-pixel-art-rendering/
 
-class_name Camera3DTexelSnapped3
+class_name Camera3DTexelSnapped
 extends Camera3D
 
 @export var snap := true

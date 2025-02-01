@@ -1,10 +1,14 @@
 @tool
-extends Node3D  # Change from MultiMeshInstance3D to Node3D
+extends Node3D
 class_name MultiMultiMeshGenerator
 
+## Target mesh for all multimeshes
 @export var target_mesh: MeshInstance3D = null : set = _set_target_mesh
+## Number of meshes per square meter
 @export var density: float = 10.0 : set = _set_density
-@export var mesh_variants: Array[Mesh] = []  # List of different meshes to use
+## List of meshes to choose from
+@export var mesh_variants: Array[Mesh] = [] 
+## Click to update multimesh
 @export var update_multimesh: bool = false : set = _set_update_multimesh
 
 var multimeshes: Array[MultiMeshInstance3D] = []

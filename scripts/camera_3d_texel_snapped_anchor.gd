@@ -1,6 +1,7 @@
 # Credit to David Holland : https://www.davidhol.land/articles/3d-pixel-art-rendering/
 
 extends Node3D
+class_name Camera3DTexelSnappedAnchor
 
 @export var move_speed: float = 4.0
 
